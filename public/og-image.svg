@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071933" />
+      <stop offset="50%" stop-color="#0A2F5C" />
+      <stop offset="100%" stop-color="#041226" />
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="textSun" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Solar Navy Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <circle cx="1000" cy="150" r="350" fill="url(#sunGlow)" />
+  <circle cx="200" cy="500" r="280" fill="url(#sunGlow)" />
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="1200" height="8" fill="#F59E0B" />
+
+  <!-- Inner Content Card -->
+  <g transform="translate(100, 100)">
+    <!-- Brand Mark -->
+    <g transform="scale(1.7)">
+      <rect width="100" height="100" rx="24" fill="#0E3A75" stroke="#F59E0B" stroke-width="3" />
+      <path d="M 32 50.8 A 18 18 0 0 1 68 50.8 Z" fill="#F59E0B" />
+      <polygon points="9,45 21,41 21,49" fill="#FBBF24" />
+      <polygon points="15,31 25,29 27,36" fill="#FBBF24" />
+      <polygon points="30,16 37,19 41,25" fill="#FBBF24" />
+      <polygon points="50,8 45,18 55,18" fill="#FBBF24" />
+      <polygon points="70,16 59,25 63,19" fill="#FBBF24" />
+      <polygon points="85,31 73,36 75,29" fill="#FBBF24" />
+      <polygon points="91,45 79,49 79,41" fill="#FBBF24" />
+      <polygon points="32.8,50.8 43.2,50.8 41.8,59.7 28.6,59.7" fill="#38BDF8" />
+      <polygon points="44.8,50.8 55.2,50.8 56.6,59.7 43.4,59.7" fill="#38BDF8" />
+      <polygon points="56.8,50.8 67.2,50.8 71.4,59.7 58.2,59.7" fill="#38BDF8" />
+      <polygon points="28.4,61.3 41.8,61.3 40.2,71.4 23.9,71.4" fill="#0284C7" />
+      <polygon points="43.4,61.3 56.6,61.3 58.2,71.4 41.8,71.4" fill="#0284C7" />
+      <polygon points="58.2,61.3 71.6,61.3 76.1,71.4 59.8,71.4" fill="#0284C7" />
+      <polygon points="23.7,73.0 40.2,73.0 38.5,84.2 18.8,84.2" fill="#0369A1" />
+      <polygon points="41.8,73.0 58.2,73.0 59.9,84.2 40.1,84.2" fill="#0369A1" />
+      <polygon points="59.8,73.0 76.3,73.0 81.2,84.2 61.5,84.2" fill="#0369A1" />
+    </g>
+
+    <!-- Main Title -->
+    <text x="210" y="80" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="54" fill="#FFFFFF">TAPCO <tspan fill="url(#textSun)">SOLAR</tspan></text>
+    <text x="215" y="130" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="22" fill="#00A651" letter-spacing="4">ENERGY SOLUTIONS</text>
+    
+    <!-- Tagline & Value Prop -->
+    <text x="0" y="240" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="42" fill="#FFFFFF">Nigeria's Premier Solar Engineering &amp; Powerwalls</text>
+    <text x="0" y="295" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="24" fill="#94A3B8">Hybrid Inverter Systems • LiFePO4 Lithium Storage • Certified Training Academy</text>
+
+    <!-- Chips / Badges -->
+    <g transform="translate(0, 340)">
+      <rect width="210" height="52" rx="16" fill="#0E3A75" stroke="#38BDF8" stroke-width="1.5" />
+      <text x="105" y="32" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#38BDF8" text-anchor="middle">⚡ 1kVA - 40kVA</text>
+
+      <g transform="translate(230, 0)">
+        <rect width="250" height="52" rx="16" fill="#0E3A75" stroke="#00A651" stroke-width="1.5" />
+        <text x="125" y="32" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#00A651" text-anchor="middle">✓ Tier-1 LiFePO4</text>
+      </g>
+
+      <g transform="translate(500, 0)">
+        <rect width="260" height="52" rx="16" fill="#0E3A75" stroke="#F59E0B" stroke-width="1.5" />
+        <text x="130" y="32" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#F59E0B" text-anchor="middle">🎓 Certified Academy</text>
+      </g>
+
+      <g transform="translate(780, 0)">
+        <rect width="220" height="52" rx="16" fill="#F59E0B" />
+        <text x="110" y="32" font-family="system-ui, sans-serif" font-weight="900" font-size="18" fill="#0A2F5C" text-anchor="middle">📞 09059375492</text>
+      </g>
+    </g>
+  </g>
+</svg>

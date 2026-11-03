@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" fill="none">
+  <!-- Brand Icon -->
+  <g transform="translate(5, 5) scale(0.8)">
+    <rect width="100" height="100" rx="20" fill="#0A2F5C" />
+    <!-- Sun Dome -->
+    <path d="M 32 50.8 A 18 18 0 0 1 68 50.8 Z" fill="#F59E0B" />
+    <!-- Sunbeams -->
+    <polygon points="9,45 21,41 21,49" fill="#F59E0B" />
+    <polygon points="15,31 25,29 27,36" fill="#F59E0B" />
+    <polygon points="30,16 37,19 41,25" fill="#F59E0B" />
+    <polygon points="50,8 45,18 55,18" fill="#F59E0B" />
+    <polygon points="70,16 59,25 63,19" fill="#F59E0B" />
+    <polygon points="85,31 73,36 75,29" fill="#F59E0B" />
+    <polygon points="91,45 79,49 79,41" fill="#F59E0B" />
+    <!-- Solar Cells -->
+    <polygon points="32.8,50.8 43.2,50.8 41.8,59.7 28.6,59.7" fill="#38BDF8" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="44.8,50.8 55.2,50.8 56.6,59.7 43.4,59.7" fill="#38BDF8" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="56.8,50.8 67.2,50.8 71.4,59.7 58.2,59.7" fill="#38BDF8" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="28.4,61.3 41.8,61.3 40.2,71.4 23.9,71.4" fill="#0284C7" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="43.4,61.3 56.6,61.3 58.2,71.4 41.8,71.4" fill="#0284C7" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="58.2,61.3 71.6,61.3 76.1,71.4 59.8,71.4" fill="#0284C7" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="23.7,73.0 40.2,73.0 38.5,84.2 18.8,84.2" fill="#0369A1" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="41.8,73.0 58.2,73.0 59.9,84.2 40.1,84.2" fill="#0369A1" stroke="#0A2F5C" stroke-width="0.8" />
+    <polygon points="59.8,73.0 76.3,73.0 81.2,84.2 61.5,84.2" fill="#0369A1" stroke="#0A2F5C" stroke-width="0.8" />
+  </g>
+  
+  <!-- Typography -->
+  <text x="100" y="38" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="28" fill="#0A2F5C" letter-spacing="1">TAPCO</text>
+  <text x="205" y="38" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="28" fill="#F59E0B" letter-spacing="1">SOLAR</text>
+  <text x="100" y="58" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#00A651" letter-spacing="3">ENERGY SOLUTIONS</text>
+  <text x="100" y="74" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10" fill="#64748B" letter-spacing="1">Engineering • Powerwalls • Academy</text>
+</svg>

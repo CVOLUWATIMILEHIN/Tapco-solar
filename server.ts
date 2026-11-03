@@ -46,8 +46,9 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   app.use(cookieParser());
 
-  // Serve persistent media uploads statically
+  // Serve persistent media uploads and public brand assets statically
   app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
+  app.use(express.static(path.join(process.cwd(), "public"), { maxAge: "1d" }));
 
   // 1. API ROUTES
 
