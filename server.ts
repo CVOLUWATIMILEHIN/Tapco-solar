@@ -639,14 +639,36 @@ async function startServer() {
     }
 
     try {
-      // Find or create admin user in pgDb
-      const existingDbAdmins = await pgDb.select().from(schema.adminUsers).where(eq(schema.adminUsers.email, emailLower));
-      let adminDbUser = existingDbAdmins[0];
       const nowStr = new Date().toLocaleString();
+      let adminDbUser: any = null;
 
-      if (!adminDbUser) {
+      try {
+        // Find or create admin user in pgDb if database is reachable
+        const existingDbAdmins = await pgDb.select().from(schema.adminUsers).where(eq(schema.adminUsers.email, emailLower));
+        adminDbUser = existingDbAdmins[0];
+
+        if (!adminDbUser) {
+          adminDbUser = {
+            id: `ADM-${Math.floor(1000 + Math.random() * 9000)}`,
+            name: emailLower === "olosundelouis@gmail.com" ? "Louis Olosunde" : "TAPCO Solar Admin",
+            email: emailLower,
+            googleId: null,
+            role: emailLower === "olosundelouis@gmail.com" ? "owner" : "admin",
+            status: "active",
+            lastLogin: nowStr,
+            createdAt: new Date()
+          };
+          await pgDb.insert(schema.adminUsers).values(adminDbUser);
+        } else {
+          await pgDb.update(schema.adminUsers)
+            .set({ lastLogin: nowStr })
+            .where(eq(schema.adminUsers.email, emailLower));
+          adminDbUser.lastLogin = nowStr;
+        }
+      } catch (dbErr) {
+        console.warn("Postgres offline during admin password login, using resilient memory user:", dbErr);
         adminDbUser = {
-          id: `ADM-${Math.floor(1000 + Math.random() * 9000)}`,
+          id: `ADM-MEM-${emailLower.slice(0, 4)}`,
           name: emailLower === "olosundelouis@gmail.com" ? "Louis Olosunde" : "TAPCO Solar Admin",
           email: emailLower,
           googleId: null,
@@ -655,12 +677,6 @@ async function startServer() {
           lastLogin: nowStr,
           createdAt: new Date()
         };
-        await pgDb.insert(schema.adminUsers).values(adminDbUser);
-      } else {
-        await pgDb.update(schema.adminUsers)
-          .set({ lastLogin: nowStr })
-          .where(eq(schema.adminUsers.email, emailLower));
-        adminDbUser.lastLogin = nowStr;
       }
 
       // Sync user to normal db structure if missing

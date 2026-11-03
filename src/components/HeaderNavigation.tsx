@@ -294,6 +294,20 @@ export default function HeaderNavigation({
               )}
             </button>
 
+            {/* Admin Portal Trigger */}
+            <button
+              onClick={() => handleNavClick("admin")}
+              className={`p-2.5 rounded-xl border transition duration-200 active:scale-95 cursor-pointer flex items-center gap-1.5 ${
+                activeTab === "admin"
+                  ? "bg-[#0057B8] text-white border-[#0057B8] shadow-sm"
+                  : "bg-slate-50 hover:bg-slate-100 hover:text-[#0057B8] border-slate-200 text-slate-600"
+              }`}
+              title="TAPCO Admin Control Center"
+            >
+              <Shield className="h-4.5 w-4.5" />
+              <span className="hidden xl:inline text-[10px] uppercase tracking-wider font-extrabold">Admin</span>
+            </button>
+
             {/* CTA: Get a Quote */}
             <button
               onClick={() => handleNavClick("contact")}
@@ -329,14 +343,14 @@ export default function HeaderNavigation({
               <BrandLogo size="sm" lightModeText={true} onClick={() => handleNavClick("home")} />
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100"
+                className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Mobile Navigation List */}
-            <div className="flex-1 px-6 py-6 space-y-3 overflow-y-auto text-left">
+            <div className="flex-1 px-6 py-6 space-y-2 overflow-y-auto text-left">
               {[
                 { id: "home", label: "Home" },
                 { id: "about", label: "About" },
@@ -346,7 +360,9 @@ export default function HeaderNavigation({
                 { id: "store", label: "Shop" },
                 { id: "resources", label: "Resources" },
                 { id: "schools", label: "Energy for Schools" },
-                { id: "contact", label: "Contact" }
+                { id: "contact", label: "Contact & BOQ" },
+                { id: "client", label: "Customer Portal" },
+                { id: "admin", label: "Admin Control Center", isSpecial: true }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -354,11 +370,18 @@ export default function HeaderNavigation({
                     handleNavClick(tab.id as any);
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full py-3.5 text-xs font-black uppercase tracking-wider border-b border-slate-100/60 flex items-center justify-between transition ${
-                    activeTab === tab.id ? "text-[#0057B8]" : "text-slate-800"
+                  className={`w-full py-3.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider border-b border-slate-100/60 flex items-center justify-between transition cursor-pointer ${
+                    activeTab === tab.id
+                      ? "bg-[#0057B8]/10 text-[#0057B8]"
+                      : tab.isSpecial
+                        ? "bg-slate-900 text-white hover:bg-slate-800"
+                        : "text-slate-800 hover:bg-slate-50"
                   }`}
                 >
-                  <span>{tab.label}</span>
+                  <span className="flex items-center gap-2">
+                    {tab.isSpecial && <Shield className="h-4 w-4 text-[#FFD100]" />}
+                    {tab.label}
+                  </span>
                   <ChevronRight className="h-4 w-4 text-slate-400" />
                 </button>
               ))}

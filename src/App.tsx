@@ -70,11 +70,58 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
   }
 };
 
+const VALID_TABS = ["home", "about", "services", "projects", "academy", "store", "resources", "schools", "contact", "client", "admin"] as const;
+type TabType = typeof VALID_TABS[number];
+
+function getInitialTab(): TabType {
+  if (typeof window === "undefined") return "home";
+  try {
+    const rawPath = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, "");
+    const searchParams = new URLSearchParams(window.location.search);
+    const tabParam = searchParams.get("tab")?.toLowerCase();
+    const hash = window.location.hash.toLowerCase().replace(/^#+/, "");
+
+    const candidate = tabParam || rawPath || hash;
+
+    if (candidate === "admin" || candidate.startsWith("admin")) return "admin";
+    if (candidate === "academy" || candidate === "training") return "academy";
+    if (candidate === "store" || candidate === "shop" || candidate === "products") return "store";
+    if (candidate === "about" || candidate === "about-us") return "about";
+    if (candidate === "services") return "services";
+    if (candidate === "projects" || candidate === "gallery") return "projects";
+    if (candidate === "schools") return "schools";
+    if (candidate === "contact" || candidate === "quote") return "contact";
+    if (candidate === "client" || candidate === "portal" || candidate === "customer") return "client";
+    if (candidate === "resources") return "resources";
+  } catch (e) {
+    // fallback
+  }
+  return "home";
+}
+
 function MainApp() {
   const { aboutData, sectionOrder } = useCMS();
-  const [activeTab, setActiveTab] = useState<
-    "home" | "about" | "services" | "projects" | "academy" | "store" | "resources" | "schools" | "contact" | "client" | "admin"
-  >("home");
+  const [activeTab, setActiveTabState] = useState<TabType>(getInitialTab);
+
+  const setActiveTab = (tab: any) => {
+    setActiveTabState(tab);
+    try {
+      const targetPath = tab === "home" ? "/" : `/${tab}`;
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({ tab }, "", targetPath);
+      }
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setActiveTabState(getInitialTab());
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const [isAcademyPortalActive, setIsAcademyPortalActive] = useState(false);
   const [livePackages, setLivePackages] = useState<SolarPackage[]>(SOLAR_PACKAGES);
