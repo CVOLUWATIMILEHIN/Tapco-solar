@@ -36,10 +36,7 @@ if (process.env.GEMINI_API_KEY) {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
-
-  // Initialize PostgreSQL database connections & seeding
-  await db.init();
+  const PORT = Number(process.env.PORT) || 3000;
 
   // JSON request body parser (handle up to 50mb for base64 file uploads)
   app.use(express.json({ limit: "50mb" }));
@@ -94,39 +91,6 @@ async function startServer() {
     console.log(`✅ Client ID: ${GOOGLE_CLIENT_ID?.substring(0, 15)}...`);
     console.log(`✅ Callback URL: ${GOOGLE_CALLBACK_URL}`);
     console.log("======================================================================\n");
-  }
-
-  // Seed PostgreSQL admin_users if empty
-  try {
-    const existingAdmins = await pgDb.select().from(schema.adminUsers);
-    if (existingAdmins.length === 0) {
-      console.log("Seeding initial administrators in PostgreSQL 'admin_users' table...");
-      const secondAdmin = "tapcosolar@gmail.com";
-      
-      await pgDb.insert(schema.adminUsers).values([
-        {
-          id: "ADM-001",
-          name: "Louis Olosunde",
-          email: "olosundelouis@gmail.com",
-          googleId: "10923841029381029381",
-          role: "owner",
-          status: "active",
-          lastLogin: "Never"
-        },
-        {
-          id: "ADM-002",
-          name: "TAPCO Solar Admin",
-          email: secondAdmin,
-          googleId: "10923841029381029382",
-          role: "admin",
-          status: "active",
-          lastLogin: "Never"
-        }
-      ]);
-      console.log("Admin Users seeded successfully.");
-    }
-  } catch (err) {
-    console.error("Error checking or seeding 'admin_users' table:", err);
   }
 
   // Helper to verify Google OAuth ID token (with dual real/preview mode support)
@@ -1647,7 +1611,42 @@ We offer solar solutions from 1kVA to 40kVA, state-of-the-art site inspections, 
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`TAPCO Solar Platform server is running on http://localhost:${PORT}`);
+    console.log(`TAPCO Solar Platform server is running on http://0.0.0.0:${PORT}`);
+
+    // Asynchronously connect & seed database in background without blocking container startup probe
+    (async () => {
+      try {
+        await db.init();
+        const existingAdmins = await pgDb.select().from(schema.adminUsers);
+        if (existingAdmins.length === 0) {
+          console.log("Seeding initial administrators in PostgreSQL 'admin_users' table...");
+          const secondAdmin = "tapcosolar@gmail.com";
+          await pgDb.insert(schema.adminUsers).values([
+            {
+              id: "ADM-001",
+              name: "Louis Olosunde",
+              email: "olosundelouis@gmail.com",
+              googleId: "10923841029381029381",
+              role: "owner",
+              status: "active",
+              lastLogin: "Never"
+            },
+            {
+              id: "ADM-002",
+              name: "TAPCO Solar Admin",
+              email: secondAdmin,
+              googleId: "10923841029381029382",
+              role: "admin",
+              status: "active",
+              lastLogin: "Never"
+            }
+          ]);
+          console.log("Admin Users seeded successfully.");
+        }
+      } catch (err) {
+        console.warn("Notice: Asynchronous database initialization or seeding error:", err);
+      }
+    })();
   });
 }
 
