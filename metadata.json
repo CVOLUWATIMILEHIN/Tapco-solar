@@ -1,0 +1,8 @@
+{
+  "name": "TAPCO Solar Platform",
+  "description": "TAPCO Solar digital headquarters, featuring the premium Solar Academy course marketplace and student learning portal, along with product ecommerce, calculations, and booking tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
